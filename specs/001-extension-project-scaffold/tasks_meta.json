@@ -1,0 +1,153 @@
+{
+  "feature": "001-extension-project-scaffold",
+  "created": "2026-04-15T20:35:21+03:00",
+  "tasks": {
+    "T001": {
+      "description": "Create `package.json` with VS Code extension manifest",
+      "files": "package.json",
+      "execution_mode": "SYNC",
+      "status": "pending",
+      "agent_type": "general"
+    },
+    "T002": {
+      "description": "Create `tsconfig.json` with strict mode, `module: commonjs`,",
+      "files": "tsconfig.json",
+      "execution_mode": "ASYNC",
+      "status": "pending",
+      "agent_type": "general"
+    },
+    "T003": {
+      "description": "Create `esbuild.js`: entry `src/extension.ts`,",
+      "files": "esbuild.js extension.ts",
+      "execution_mode": "ASYNC",
+      "status": "pending",
+      "agent_type": "general"
+    },
+    "T004": {
+      "description": "Create `.vscodeignore` excluding `src/`, `tests/`, `__mocks__/`,",
+      "files": "",
+      "execution_mode": "ASYNC",
+      "status": "pending",
+      "agent_type": "general"
+    },
+    "T005": {
+      "description": "Create `.gitignore` excluding `dist/`, `coverage/`, `node_modules/`",
+      "files": "",
+      "execution_mode": "ASYNC",
+      "status": "pending",
+      "agent_type": "general"
+    },
+    "T006": {
+      "description": "Create `vitest.config.ts`",
+      "files": "config.ts",
+      "execution_mode": "ASYNC",
+      "status": "pending",
+      "agent_type": "general"
+    },
+    "T007": {
+      "description": "Create `__mocks__/vscode.ts` — hand-rolled Vitest mock for the",
+      "files": "vscode.ts",
+      "execution_mode": "ASYNC",
+      "status": "pending",
+      "agent_type": "general"
+    },
+    "T008": {
+      "description": "Create `tests/VisualMarkdownEditorProvider.test.ts`",
+      "files": "test.ts",
+      "execution_mode": "ASYNC",
+      "status": "pending",
+      "agent_type": "general"
+    },
+    "T009": {
+      "description": "Create `tests/extension.test.ts`",
+      "files": "test.ts",
+      "execution_mode": "ASYNC",
+      "status": "pending",
+      "agent_type": "general"
+    },
+    "T010": {
+      "description": "Create `src/VisualMarkdownEditorProvider.ts`",
+      "files": "VisualMarkdownEditorProvider.ts",
+      "execution_mode": "SYNC",
+      "status": "pending",
+      "agent_type": "general"
+    },
+    "T011": {
+      "description": "Create `src/webview/index.html`",
+      "files": "",
+      "execution_mode": "ASYNC",
+      "status": "pending",
+      "agent_type": "general"
+    },
+    "T012": {
+      "description": "Create `src/extension.ts`",
+      "files": "extension.ts",
+      "execution_mode": "SYNC",
+      "status": "pending",
+      "agent_type": "general"
+    },
+    "T013": {
+      "description": "Add to `tests/VisualMarkdownEditorProvider.test.ts`",
+      "files": "test.ts",
+      "execution_mode": "ASYNC",
+      "status": "pending",
+      "agent_type": "general"
+    },
+    "T014": {
+      "description": "Implement `onDidReceiveMessage` handler in",
+      "files": "",
+      "execution_mode": "SYNC",
+      "status": "pending",
+      "agent_type": "general"
+    },
+    "T015": {
+      "description": "Create `tests/settings.test.ts`",
+      "files": "test.ts",
+      "execution_mode": "ASYNC",
+      "status": "pending",
+      "agent_type": "general"
+    },
+    "T016": {
+      "description": "Add to `tests/extension.test.ts`",
+      "files": "test.ts",
+      "execution_mode": "ASYNC",
+      "status": "pending",
+      "agent_type": "general"
+    },
+    "T017": {
+      "description": "Create `src/settings.ts`",
+      "files": "settings.ts",
+      "execution_mode": "ASYNC",
+      "status": "pending",
+      "agent_type": "general"
+    },
+    "T018": {
+      "description": "Implement `onDidOpenTextDocument` routing in `src/extension.ts`",
+      "files": "extension.ts",
+      "execution_mode": "SYNC",
+      "status": "pending",
+      "agent_type": "general"
+    },
+    "T019": {
+      "description": "Run `npm run compile` — confirm zero TypeScript errors in strict mode.",
+      "files": "",
+      "execution_mode": "SYNC",
+      "status": "pending",
+      "agent_type": "general"
+    },
+    "T020": {
+      "description": "Run `npm test` — confirm 100% line/branch/function/statement coverage,",
+      "files": "",
+      "execution_mode": "ASYNC",
+      "status": "pending",
+      "agent_type": "general"
+    },
+    "T021": {
+      "description": "Verify `.vscodeignore` excludes all non-distribution files.",
+      "files": "",
+      "execution_mode": "ASYNC",
+      "status": "pending",
+      "agent_type": "general"
+    }
+  }
+}

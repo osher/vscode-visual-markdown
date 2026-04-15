@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="default-src 'none'; script-src 'nonce-{{NONCE}}'; style-src 'unsafe-inline';"
+  />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visual Markdown</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      font-family: var(--vscode-font-family, sans-serif);
+      color: var(--vscode-foreground);
+      background: var(--vscode-editor-background);
+    }
+    .placeholder {
+      opacity: 0.5;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+    button {
+      padding: 0.4rem 1rem;
+      cursor: pointer;
+      background: var(--vscode-button-background);
+      color: var(--vscode-button-foreground);
+      border: none;
+      border-radius: 3px;
+      font-size: 0.9rem;
+    }
+    button:hover {
+      background: var(--vscode-button-hoverBackground);
+    }
+  </style>
+</head>
+<body>
+  <p class="placeholder">Visual Markdown editor — coming soon</p>
+  <button data-action="open-raw">Edit Raw</button>
+
+  <script nonce="{{NONCE}}">
+    const vscode = acquireVsCodeApi();
+    document.querySelector('[data-action="open-raw"]').addEventListener('click', () => {
+      vscode.postMessage({ type: 'openRaw' });
+    });
+  </script>
+</body>
+</html>

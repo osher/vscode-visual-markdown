@@ -1,0 +1,55 @@
+{
+  "name": "vscode-visual-markdown",
+  "displayName": "Visual Markdown",
+  "description": "Obsidian-style live preview markdown editor for VS Code",
+  "version": "0.0.1",
+  "publisher": "visual-markdown",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": ["Editors"],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "customEditors": [
+      {
+        "viewType": "visualMarkdown.editor",
+        "displayName": "Visual Markdown",
+        "selector": [
+          { "filenamePattern": "*.md" }
+        ],
+        "priority": "default"
+      }
+    ],
+    "configuration": {
+      "title": "Visual Markdown",
+      "properties": {
+        "visualMarkdown.defaultEditor": {
+          "type": "string",
+          "enum": ["webview", "textEditor"],
+          "enumDescriptions": [
+            "Open .md files in the Visual Markdown webview by default",
+            "Open .md files in VS Code's built-in text editor by default"
+          ],
+          "default": "webview",
+          "description": "Controls which editor opens .md files by default."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "node esbuild.js",
+    "watch": "node esbuild.js --watch",
+    "package": "node esbuild.js --minify",
+    "vscode:prepublish": "npm run package",
+    "test": "vitest run --coverage"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.80.0",
+    "@vitest/coverage-v8": "^1.0.0",
+    "esbuild": "^0.20.0",
+    "typescript": "^5.0.0",
+    "vitest": "^1.0.0"
+  }
+}

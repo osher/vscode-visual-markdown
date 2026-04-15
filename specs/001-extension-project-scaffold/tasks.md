@@ -23,19 +23,19 @@ FIRST and confirmed failing before their corresponding implementation tasks begi
 
 **Purpose**: Project skeleton and build tooling. No source logic yet.
 
-- [ ] T001 [SYNC] Create `package.json` with VS Code extension manifest:
+- [x] T001 [SYNC] Create `package.json` with VS Code extension manifest:
   `name`, `displayName`, `publisher`, `engines.vscode ^1.80.0`, `main ./dist/extension.js`,
   `contributes.customEditors` (`viewType: visualMarkdown.editor`, `priority: option`,
   selector `*.md`), `contributes.configuration` (`visualMarkdown.defaultEditor` enum),
   `activationEvents`, `scripts` (compile/watch/package/test/vscode:prepublish)
-- [ ] T002 [P] [ASYNC] Create `tsconfig.json` with strict mode, `module: commonjs`,
+- [x] T002 [P] [ASYNC] Create `tsconfig.json` with strict mode, `module: commonjs`,
   `target: ES2020`, `outDir: dist`, `rootDir: src`, `sourceMap: true`
-- [ ] T003 [P] [ASYNC] Create `esbuild.js`: entry `src/extension.ts`,
+- [x] T003 [P] [ASYNC] Create `esbuild.js`: entry `src/extension.ts`,
   outfile `dist/extension.js`, external `vscode`, format `cjs`, platform `node`,
   sourcemap, watch/minify flags via `process.argv`
-- [ ] T004 [P] [ASYNC] Create `.vscodeignore` excluding `src/`, `tests/`, `__mocks__/`,
+- [x] T004 [P] [ASYNC] Create `.vscodeignore` excluding `src/`, `tests/`, `__mocks__/`,
   `coverage/`, `*.ts`, `esbuild.js`, `vitest.config.ts`, `.specify/`, `.claude/`
-- [ ] T005 [P] [ASYNC] Create `.gitignore` excluding `dist/`, `coverage/`, `node_modules/`
+- [x] T005 [P] [ASYNC] Create `.gitignore` excluding `dist/`, `coverage/`, `node_modules/`
 
 ---
 
@@ -48,7 +48,7 @@ This phase delivers User Story 4 (test infrastructure) as a side effect.
 
 **Goal (US4)**: `npm test` runs, enforces 100% coverage, produces plain + HTML reports.
 
-- [ ] T006 [SYNC] [US4] Create `vitest.config.ts`:
+- [x] T006 [SYNC] [US4] Create `vitest.config.ts`:
   - `test.environment: node`
   - `coverage.provider: v8`
   - `coverage.reporter: ['text', 'html']`
@@ -56,7 +56,7 @@ This phase delivers User Story 4 (test infrastructure) as a side effect.
   - `coverage.include: ['src/**/*.ts']`
   - `resolve.alias: { vscode: path.resolve(__dirname, '__mocks__/vscode.ts') }`
   - Wire `npm test` script to `vitest run --coverage`
-- [ ] T007 [SYNC] [US4] Create `__mocks__/vscode.ts` — hand-rolled Vitest mock for the
+- [x] T007 [SYNC] [US4] Create `__mocks__/vscode.ts` — hand-rolled Vitest mock for the
   `vscode` module. Must stub: `window`, `workspace.getConfiguration`, `commands.executeCommand`,
   `Uri`, `ExtensionContext`, `CustomTextEditorProvider`-related types, `WebviewPanel`,
   `Disposable`. Annotate with `as unknown as typeof import('vscode')` where needed.
@@ -78,12 +78,12 @@ panel appears, placeholder visible, no extension host log errors.
 
 ### Tests for US1 (write first — must FAIL before implementation)
 
-- [ ] T008 [P] [SYNC] [US1] Create `tests/VisualMarkdownEditorProvider.test.ts`:
+- [x] T008 [P] [SYNC] [US1] Create `tests/VisualMarkdownEditorProvider.test.ts`:
   - Test: `resolveCustomTextEditor` sets `webviewPanel.webview.html` to non-empty string
   - Test: webview HTML contains a button with text "Edit Raw" (or data-action="open-raw")
   - Test: `webviewPanel.webview.options.enableScripts` is `true`
   - Confirm these tests FAIL (provider not yet implemented)
-- [ ] T009 [P] [SYNC] [US1] Create `tests/extension.test.ts`:
+- [x] T009 [P] [SYNC] [US1] Create `tests/extension.test.ts`:
   - Test: `activate()` registers a `CustomTextEditorProvider` via
     `vscode.window.registerCustomEditorProvider` with viewType `visualMarkdown.editor`
   - Test: `activate()` subscribes to `vscode.workspace.onDidOpenTextDocument`
@@ -91,18 +91,18 @@ panel appears, placeholder visible, no extension host log errors.
 
 ### Implementation for US1
 
-- [ ] T010 [SYNC] [US1] Create `src/VisualMarkdownEditorProvider.ts`:
+- [x] T010 [SYNC] [US1] Create `src/VisualMarkdownEditorProvider.ts`:
   Implements `vscode.CustomTextEditorProvider`. `resolveCustomTextEditor` sets
   `webviewPanel.webview.options = { enableScripts: true }` and
   `webviewPanel.webview.html = getWebviewContent()`. `getWebviewContent()` returns the
   placeholder HTML loaded from `src/webview/index.html` (or inlined). Registers
   `webviewPanel.webview.onDidReceiveMessage` (stub — handler added in US2).
-- [ ] T011 [P] [ASYNC] [US1] Create `src/webview/index.html`:
+- [x] T011 [P] [ASYNC] [US1] Create `src/webview/index.html`:
   Static placeholder HTML. Must include: `<meta http-equiv="Content-Security-Policy">`
   header (allow `vscode-resource:` scripts, no inline styles from external origins),
   visible placeholder text, and a button with `data-action="open-raw"` that calls
   `acquireVsCodeApi().postMessage({ type: 'openRaw' })` on click.
-- [ ] T012 [SYNC] [US1] Create `src/extension.ts`:
+- [x] T012 [SYNC] [US1] Create `src/extension.ts`:
   `activate(context)` registers `VisualMarkdownEditorProvider` via
   `vscode.window.registerCustomEditorProvider('visualMarkdown.editor', provider, ...)`.
   Subscribes to `vscode.workspace.onDidOpenTextDocument` — routing logic stubbed
@@ -124,14 +124,14 @@ Run `F5` in VS Code — open a `.md` file, confirm webview appears with placehol
 
 ### Tests for US2 (add to existing test file — must FAIL before implementation)
 
-- [ ] T013 [SYNC] [US2] Add to `tests/VisualMarkdownEditorProvider.test.ts`:
+- [x] T013 [SYNC] [US2] Add to `tests/VisualMarkdownEditorProvider.test.ts`:
   - Test: when `onDidReceiveMessage` receives `{ type: 'openRaw' }`, it calls
     `vscode.commands.executeCommand('vscode.openWith', document.uri, 'default')`
   - Confirm this test FAILS (handler not yet implemented)
 
 ### Implementation for US2
 
-- [ ] T014 [SYNC] [US2] Implement `onDidReceiveMessage` handler in
+- [x] T014 [SYNC] [US2] Implement `onDidReceiveMessage` handler in
   `src/VisualMarkdownEditorProvider.ts`: on `{ type: 'openRaw' }`, call
   `vscode.commands.executeCommand('vscode.openWith', document.uri, 'default')`.
   No other message types handled yet.
@@ -153,13 +153,13 @@ editor opens. Set to `"webview"` — webview opens.
 
 ### Tests for US3 (write first — must FAIL before implementation)
 
-- [ ] T015 [P] [SYNC] [US3] Create `tests/settings.test.ts`:
+- [x] T015 [P] [SYNC] [US3] Create `tests/settings.test.ts`:
   - Test: `getDefaultEditor()` returns `"webview"` when config returns `"webview"`
   - Test: `getDefaultEditor()` returns `"textEditor"` when config returns `"textEditor"`
   - Test: `getDefaultEditor()` returns `"webview"` (fallback) when config returns
     an unrecognized value
   - Confirm these tests FAIL (settings.ts not yet implemented)
-- [ ] T016 [P] [SYNC] [US3] Add to `tests/extension.test.ts`:
+- [x] T016 [P] [SYNC] [US3] Add to `tests/extension.test.ts`:
   - Test: when `onDidOpenTextDocument` fires for a `.md` file and setting is `"webview"`,
     `vscode.commands.executeCommand('vscode.openWith', doc.uri, 'visualMarkdown.editor')`
     is called
@@ -168,11 +168,11 @@ editor opens. Set to `"webview"` — webview opens.
 
 ### Implementation for US3
 
-- [ ] T017 [ASYNC] [US3] Create `src/settings.ts`:
+- [x] T017 [ASYNC] [US3] Create `src/settings.ts`:
   Exports `getDefaultEditor(): 'webview' | 'textEditor'`. Reads
   `vscode.workspace.getConfiguration('visualMarkdown').get('defaultEditor')`.
   Returns `'webview'` as fallback for unrecognized values.
-- [ ] T018 [SYNC] [US3] Implement `onDidOpenTextDocument` routing in `src/extension.ts`:
+- [x] T018 [SYNC] [US3] Implement `onDidOpenTextDocument` routing in `src/extension.ts`:
   For each `.md` document opened, call `getDefaultEditor()`. If `'webview'`, call
   `vscode.commands.executeCommand('vscode.openWith', doc.uri, 'visualMarkdown.editor')`.
   If `'textEditor'`, do nothing. Guard against non-`.md` files (`languageId !== 'markdown'`).
@@ -186,11 +186,11 @@ setting values work in the Extension Development Host.
 
 **Purpose**: Final build verification and cross-cutting checks.
 
-- [ ] T019 [SYNC] Run `npm run compile` — confirm zero TypeScript errors in strict mode.
+- [x] T019 [SYNC] Run `npm run compile` — confirm zero TypeScript errors in strict mode.
   Fix any type errors surfaced by the build.
-- [ ] T020 [SYNC] Run `npm test` — confirm 100% line/branch/function/statement coverage,
+- [x] T020 [SYNC] Run `npm test` — confirm 100% line/branch/function/statement coverage,
   exit code 0, HTML report at `coverage/index.html` is browsable and complete.
-- [ ] T021 [ASYNC] Verify `.vscodeignore` excludes all non-distribution files.
+- [x] T021 [ASYNC] Verify `.vscodeignore` excludes all non-distribution files.
   Run `npx vsce ls` to inspect the package manifest and confirm `dist/` and
   `package.json` are included; source, tests, and spec files are excluded.
 

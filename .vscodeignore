@@ -1,0 +1,15 @@
+src/
+tests/
+__mocks__/
+coverage/
+specs/
+.specify/
+.claude/
+*.ts
+!dist/**
+esbuild.js
+vitest.config.ts
+tsconfig.json
+.gitignore
+.vscodeignore
+node_modules/
